@@ -1,0 +1,20 @@
+package ru.nemtsov.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet (name = "cart", urlPatterns = "/cart")
+public class Cart extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().println("<h1>Menu</h1>");
+        resp.getWriter().println("<a href=\"main\">Main</a>");
+        resp.getWriter().println("<a href=\"catalog\">Catalog</a>");
+        resp.getWriter().println("Cart");
+        resp.getWriter().println("<h1>Cart<h1>");
+    }
+}
