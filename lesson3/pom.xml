@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.nemtsov.ee</groupId>
-  <artifactId>lesson2</artifactId>
+  <artifactId>lesson3</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
@@ -37,7 +37,7 @@
   </dependencies>
 
   <build>
-    <finalName>lesson2</finalName>
+    <finalName>lesson3</finalName>
 
     <plugins>
       <plugin>

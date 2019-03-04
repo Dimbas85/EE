@@ -11,10 +11,6 @@ import java.io.IOException;
 public class Catalog extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().println("<h1>Menu</h1>");
-        resp.getWriter().println("<a href=\"main\">Main</a>");
-        resp.getWriter().println("Catalog");
-        resp.getWriter().println("<a href=\"cart\">Cart</a>");
-        resp.getWriter().println("<h1>Catalog<h1>");
+        getServletContext().getRequestDispatcher("/Catalog.jsp").forward(req, resp);
     }
 }
