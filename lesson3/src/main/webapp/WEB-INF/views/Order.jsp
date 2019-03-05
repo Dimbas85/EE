@@ -8,15 +8,13 @@
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <html>
 <head>
-    <title>Cart</title>
+    <title>Order</title>
 </head>
 <body>
-    <h1>Menu</h1>
-    <p>
-        <a href=main>Main</a>
-        <a href=catalog>Catalog</a>
-        Cart
-    </p>
-    <h1>Cart</h1>
+
+    <jsp:include page="MainMenu.jsp" />
+
+    <h1>Order</h1>
+
 </body>
 </html>

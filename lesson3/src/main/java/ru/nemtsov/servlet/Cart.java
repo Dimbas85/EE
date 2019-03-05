@@ -11,6 +11,6 @@ import java.io.IOException;
 public class Cart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/Cart.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/Cart.jsp").forward(req, resp);
     }
 }
