@@ -1,0 +1,21 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <p>
+            <h:outputLabel for="name-id">Category name:</h:outputLabel>
+            <h:inputText id="name-id" value="#{categories.name}" required="true" requiredMessage="Category name couldn't be empty"/>
+            <h:message for="name-id" class="error" />
+        </p>
+
+        <h:commandButton value="Save" action="#{categories.saveCategory}"/>
+    </h:form>
+</h:body>
+
+</html>
