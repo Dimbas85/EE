@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Primefaces product List</title>
+
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+</h:head>
+
+<h:body>
+
+    <h:form id="menuForm">
+        <p:menubar>
+            <p:submenu label="Сategory" icon="pi pi-file">
+                <p:menuitem value="New" url="#"/>
+                <p:menuitem value="Edit" url="#"/>
+                <p:menuitem value="Delete" url="#"/>
+            </p:submenu>
+
+            <p:submenu label="Product" icon="pi pi-pencil">
+                <p:menuitem value="New" actionListener="#{products.newProductAction}"
+                            oncomplete="PF('productDialog').show()" update="dataForm"/>
+            </p:submenu>
+
+            <f:facet name="options">
+                <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+                <p:commandButton id="id-cart-button" type="button" value="Cart" icon="pi pi-shopping-cart"/>
+                <p:commandButton value="Logout" action="#{products.logout}" icon="pi pi-home" ajax="false"/>
+            </f:facet>
+        </p:menubar>
+
+        <p:overlayPanel id="cartPanel" for="id-cart-button" hideEffect="fade"
+                        dynamic="true" style="width:200px">
+
+            <p:dataTable var="prod" value="#{cart.products}" rows="5" paginator="true">
+                <p:column headerText="Name">
+                    <h:outputText value="#{prod.name}" />
+                </p:column>
+
+                <p:column headerText="Price">
+                    <h:outputText value="#{prod.price}" />
+                </p:column>
+            </p:dataTable>
+        </p:overlayPanel>
+    </h:form>
+
+    <h:form id="dataForm">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-3">
+                <p:panelMenu id="id-categories" model="#{categories.model}" expanded="true">
+                    <f:event type="preRenderView" listener="#{categories.preloadCategoriesList}"/>
+                </p:panelMenu>
+
+                <p:contextMenu for="id-categories">
+                    <p:menuitem value="New" action="#{categories.actionEmpty}"/>
+                    <p:menuitem value="Edit" action="#{categories.actionEmpty}"/>
+                    <p:menuitem value="Delete" action="#{categories.actionEmpty}"/>
+                </p:contextMenu>
+            </div>
+
+            <div class="ui-g-12 ui-md-9">
+                <p:dataGrid var="product" value="#{products.productList}" columns="3" layout="grid"
+                            rows="12" paginator="true" id="products"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+
+                    <f:event type="preRenderView" listener="#{products.preloadProductList}"/>
+
+                    <f:facet name="header">
+                        Products
+                    </f:facet>
+
+                    <p:panel header="#{product.name}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+
+                            <h:outputText value="#{product.name}"/>
+
+                            <h:outputText value="#{product.price}"/>
+
+                            <p:commandLink update=":dataForm:productDetail"
+                                           action="#{products.setProduct(product)}"
+                                           oncomplete="PF('productDialog').show()" ajax="true">
+                                Edit
+                            </p:commandLink>
+
+                            <p:commandLink update=":dataForm" action="#{products.deleteAction(product)}" ajax="true">
+                                Delete
+                            </p:commandLink>
+
+                            <p:commandLink update=":dataForm :menuForm:cartPanel" action="#{products.addToCart(product)}" ajax="true">
+                                Add to cart
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+
+                <ui:include src="WEB-INF/dialogs/edit_product.xhtml"/>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>
